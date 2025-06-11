@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color themeColor =const Color(0xff07ADAE);
+  static Color themeColor = const Color(0xff07ADAE);
 
 
   /// used to convert normal colors into the material colors

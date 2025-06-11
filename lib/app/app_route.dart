@@ -1,5 +1,4 @@
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/splash_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppRoute {

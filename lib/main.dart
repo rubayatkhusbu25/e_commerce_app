@@ -11,7 +11,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // framework error will be detected using firebase crashlytics
+  /// framework error will be detected using firebase crashlytics
 
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
@@ -19,7 +19,8 @@ Future<void> main() async {
 
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  // for async error
+
+  /// for async error
 
   PlatformDispatcher.instance.onError = (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
