@@ -9,7 +9,6 @@ class AppTheme {
         colorScheme: ColorScheme.fromSwatch(
         primarySwatch: AppColors.getMaterialColor(AppColors.themeColor),
 
-
         ));
   }
 }
