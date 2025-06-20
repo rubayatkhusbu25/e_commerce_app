@@ -89,6 +89,26 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _getPopularProducts(){
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            child: Image.asset(AssetsPath.demoShoePng),
+          ),
+          Text("Nike U738Ng7 - New model of 2025"),
+          Row(
+            children: [
+              Text("৳100")
+
+            ],
+          )
+        ],
+      ),
+    );
+
+  }
+
 
 }
 
