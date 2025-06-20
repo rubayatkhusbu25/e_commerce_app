@@ -43,7 +43,13 @@ class AppTheme {
               letterSpacing: .4,
             ))
         ),
-      )
+      ),
+      appBarTheme: AppBarTheme(
+        titleTextStyle: TextStyle(fontSize: 18,color: Colors.black87),
+        iconTheme: IconThemeData( color: Colors.black87, size: 20),
+
+      ),
+
     );
   }
 
@@ -57,6 +63,16 @@ class AppTheme {
       titleLarge: TextStyle(
         letterSpacing: .4,
         fontSize: 28,
+        fontWeight: FontWeight.w600,
+      ),
+      titleMedium: TextStyle(
+        letterSpacing: .4,
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
+      titleSmall: TextStyle(
+        letterSpacing: .4,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
       ),
       headlineMedium: TextStyle(fontSize: 16, color: Colors.grey),

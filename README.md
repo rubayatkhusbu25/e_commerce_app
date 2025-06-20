@@ -13,6 +13,15 @@
 
 /// firebase setup
 
+App Features:
+1. fvm added
+2. Crashlytics added
+3. Reusable components
+4. Responsiveness 
+5. DTD(Domain Type Design) followed
+6. Authentication with REST API
+7. Named routes added
+
 
 
 

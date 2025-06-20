@@ -2,6 +2,7 @@ import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart'
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/splash_screen.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/screen/home_screen.dart';
+import 'package:e_commerce_app_ostad/features/products/ui/screen/product_category.dart';
 import 'package:flutter/material.dart';
 
 class AppRoute {
@@ -17,6 +18,8 @@ class AppRoute {
       screenWidgets = SignUpScreen();
     }else if(settings.name == HomeScreen.name){
       screenWidgets = HomeScreen();
+    } else if(settings.name == ProductCategory.name){
+    screenWidgets = ProductCategory();
     }
     return MaterialPageRoute(builder: (context) => screenWidgets);
 
