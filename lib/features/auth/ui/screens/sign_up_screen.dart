@@ -2,6 +2,7 @@ import 'package:e_commerce_app_ostad/app/app_colors.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -28,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding:  EdgeInsets.all(24.r),
           child: SingleChildScrollView(
             child: Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -36,11 +37,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
 
                 children: [
-                  SizedBox(height: 44),
-                  AppLogo(height: 90, width: 90),
-                  SizedBox(height: 12,),
+                  SizedBox(height: 44.h),
+                  AppLogo(height: 90.h, width: 90.w),
+                  SizedBox(height: 12.h,),
                   Text("Register Account", style: textTheme.titleLarge),
-                  SizedBox(height: 6,),
+                  SizedBox(height: 6.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 5,
@@ -52,12 +53,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       Icon(
                         Icons.edit_calendar_outlined,
-                        size: 18,
+                        size: 18.r,
                         color: Colors.grey,
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10.h,),
                 Column(
                   spacing: 12,
                   children: [
@@ -158,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                  SizedBox(height: 6,),
+                  SizedBox(height: 6.h,),
                   ElevatedButton(
                     onPressed: _onTapSignUp,
                     child: Text("Sign Up"),
@@ -173,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textStyle: WidgetStatePropertyAll(
                         TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           letterSpacing: .4,
                         ),
                       ),
