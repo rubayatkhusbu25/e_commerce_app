@@ -2,6 +2,7 @@ import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart'
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/splash_screen.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/screen/main_bottom_nav.dart';
+import 'package:e_commerce_app_ostad/features/products/ui/screen/product_details_screen.dart';
 import 'package:e_commerce_app_ostad/features/products/ui/screen/product_list_screen.dart';
 import 'package:e_commerce_app_ostad/features/wishList/ui/screen/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,9 @@ class AppRoute {
     } else if (settings.name == ProductListScreen.name) {
       final String category = settings.arguments as String;
       screenWidgets = ProductListScreen(category: category);
+    }else if(settings.name==ProductDetailsScreen.name){
+      final String productId = settings.arguments as String;
+      screenWidgets = ProductDetailsScreen(productId: productId,);
     }
     return MaterialPageRoute(builder: (context) => screenWidgets);
   }

@@ -3,7 +3,7 @@ import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/appbar_icon.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/home_carosalslider.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/widgets/product_category_item.dart';
-import 'package:e_commerce_app_ostad/features/home/ui/widgets/product_card.dart';
+import 'package:e_commerce_app_ostad/features/common/ui/widgets/product_card.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

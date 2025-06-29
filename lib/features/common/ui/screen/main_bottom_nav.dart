@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_ostad/features/cart/ui/screen/cart_screen.dart';
 import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav_controller.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/screen/home_screen.dart';
 import 'package:e_commerce_app_ostad/features/products/ui/screen/product_category.dart';
@@ -18,7 +19,7 @@ class _MainBottomNavState extends State<MainBottomNav> {
   final List<Widget> _screens = [
     HomeScreen(),
     ProductCategory(),
-    Text("data"),
+    CartScreen(),
     WishListScreen(),
   ];
   @override
