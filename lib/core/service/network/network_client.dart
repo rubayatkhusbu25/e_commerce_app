@@ -4,198 +4,266 @@ import 'dart:ui';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
-
 part 'network_response.dart';
 
 class NetworkClient {
   Logger _logger = Logger();
-  final String _defaultErrorMessage= "Something went wrong";
+  final String _defaultErrorMessage = "Something went wrong";
 
   final VoidCallback onUnAuthorize;
   final Map<String, String> commonHeaders;
 
-
-  NetworkClient({required this.onUnAuthorize,required this.commonHeaders, });
+  NetworkClient({required this.onUnAuthorize, required this.commonHeaders});
 
   // get
-  Future<NetworkResponse>getRequest(String url)async {
-    try{
+  Future<NetworkResponse> getRequest(String url) async {
+    try {
       Uri uri = Uri.parse(url);
 
-
-      _logRequest(url, headers: commonHeaders );
-
+      _logRequest(url, headers: commonHeaders);
 
       final Response response = await get(uri, headers: commonHeaders);
 
       _logResponse(response);
 
-      if(response.statusCode==200 || response.statusCode==201){
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode, responseBody: responseBody, isSuccess: true);
-
-      }else if( response.statusCode==401){
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          isSuccess: true,
+        );
+      } else if (response.statusCode == 401) {
         onUnAuthorize();
-        return NetworkResponse(statusCode: response.statusCode, errorMessage: "Un-authorized",isSuccess: false);
-
-      }else{
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          errorMessage: "Un-authorized",
+          isSuccess: false,
+        );
+      } else {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode,
-            responseBody: responseBody,
-            errorMessage:responseBody["message"]??_defaultErrorMessage,
-          isSuccess: false
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
+          isSuccess: false,
         );
       }
-    }on Exception catch(e){
-      return NetworkResponse(statusCode: -1, errorMessage: e.toString(),isSuccess: false);
+    } on Exception catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        errorMessage: e.toString(),
+        isSuccess: false,
+      );
     }
-
   }
 
   // post
-  Future<NetworkResponse>postRequest(String url,Map<String, dynamic>?body)async {
-    try{
+  Future<NetworkResponse> postRequest(
+    String url,
+    Map<String, dynamic>? body,
+  ) async {
+    try {
       Uri uri = Uri.parse(url);
 
+      _logRequest(url, headers: commonHeaders,body: body);
 
-      _logRequest(url, headers: commonHeaders );
-
-
-      final Response response = await post(uri, headers: commonHeaders,body: jsonEncode(body));
+      final Response response = await post(
+        uri,
+        headers: commonHeaders,
+        body: jsonEncode(body),
+      );
 
       _logResponse(response);
 
-      if(response.statusCode==200 || response.statusCode==201){
-        final responseBody = jsonDecode(response.body);
-        return NetworkResponse(statusCode: response.statusCode, responseBody: responseBody,isSuccess: true);
-
-      }else if( response.statusCode==401){
-        onUnAuthorize();
-        return NetworkResponse(statusCode: response.statusCode, errorMessage: "Un-authorized",isSuccess: false);
-
-      }else{
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode,
-            responseBody: responseBody,
-            errorMessage:responseBody["message"]??_defaultErrorMessage ,
-            isSuccess: false);
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          isSuccess: true,
+        );
+      } else if (response.statusCode == 401) {
+        onUnAuthorize();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          errorMessage: "Un-authorized",
+          isSuccess: false,
+        );
+      } else {
+        final responseBody = jsonDecode(response.body);
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
+          isSuccess: false,
+        );
       }
-    }on Exception catch(e){
-      return NetworkResponse(statusCode: -1, errorMessage: e.toString(),isSuccess: false);
+    } on Exception catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        errorMessage: e.toString(),
+        isSuccess: false,
+      );
     }
-
   }
+
   // put
-  Future<NetworkResponse>putRequest(String url,Map<String, dynamic>?body)async {
-    try{
+  Future<NetworkResponse> putRequest(
+    String url,
+    Map<String, dynamic>? body,
+  ) async {
+    try {
       Uri uri = Uri.parse(url);
 
+      _logRequest(url, headers: commonHeaders);
 
-      _logRequest(url, headers: commonHeaders );
-
-
-      final Response response = await put(uri, headers: commonHeaders,body: jsonEncode(body));
+      final Response response = await put(
+        uri,
+        headers: commonHeaders,
+        body: jsonEncode(body),
+      );
 
       _logResponse(response);
 
-      if(response.statusCode==200 || response.statusCode==201){
-        final responseBody = jsonDecode(response.body);
-        return NetworkResponse(statusCode: response.statusCode, responseBody: responseBody,isSuccess: true);
-
-      }else if( response.statusCode==401){
-        onUnAuthorize();
-        return NetworkResponse(statusCode: response.statusCode, errorMessage: "Un-authorized",isSuccess: false);
-
-      }else{
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode,
-            responseBody: responseBody,
-            errorMessage:responseBody["message"]??_defaultErrorMessage ,
-            isSuccess: false);
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          isSuccess: true,
+        );
+      } else if (response.statusCode == 401) {
+        onUnAuthorize();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          errorMessage: "Un-authorized",
+          isSuccess: false,
+        );
+      } else {
+        final responseBody = jsonDecode(response.body);
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
+          isSuccess: false,
+        );
       }
-    }on Exception catch(e){
-      return NetworkResponse(statusCode: -1, errorMessage: e.toString(),isSuccess: false);
+    } on Exception catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        errorMessage: e.toString(),
+        isSuccess: false,
+      );
     }
-
   }
 
   // patch
-  Future<NetworkResponse>patchRequest(String url,Map<String, dynamic>?body)async {
-    try{
+  Future<NetworkResponse> patchRequest(
+    String url,
+    Map<String, dynamic>? body,
+  ) async {
+    try {
       Uri uri = Uri.parse(url);
 
+      _logRequest(url, headers: commonHeaders);
 
-      _logRequest(url, headers: commonHeaders );
-
-
-      final Response response = await patch(uri, headers: commonHeaders,body: jsonEncode(body));
+      final Response response = await patch(
+        uri,
+        headers: commonHeaders,
+        body: jsonEncode(body),
+      );
 
       _logResponse(response);
 
-      if(response.statusCode==200 || response.statusCode==201){
-        final responseBody = jsonDecode(response.body);
-        return NetworkResponse(statusCode: response.statusCode, responseBody: responseBody,isSuccess: true);
-
-      }else if( response.statusCode==401){
-        onUnAuthorize();
-        return NetworkResponse(statusCode: response.statusCode, errorMessage: "Un-authorized",isSuccess: false);
-
-      }else{
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode,
-            responseBody: responseBody,
-            errorMessage:responseBody["message"]??_defaultErrorMessage,isSuccess: false );
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          isSuccess: true,
+        );
+      } else if (response.statusCode == 401) {
+        onUnAuthorize();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          errorMessage: "Un-authorized",
+          isSuccess: false,
+        );
+      } else {
+        final responseBody = jsonDecode(response.body);
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
+          isSuccess: false,
+        );
       }
-    }on Exception catch(e){
-      return NetworkResponse(statusCode: -1, errorMessage: e.toString(),isSuccess: false);
+    } on Exception catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        errorMessage: e.toString(),
+        isSuccess: false,
+      );
     }
-
   }
 
   //delete
-  Future<NetworkResponse>deleteRequest(String url,Map<String, dynamic>?body)async {
-    try{
+  Future<NetworkResponse> deleteRequest(
+    String url,
+    Map<String, dynamic>? body,
+  ) async {
+    try {
       Uri uri = Uri.parse(url);
 
+      _logRequest(url, headers: commonHeaders);
 
-      _logRequest(url, headers: commonHeaders );
-
-
-      final Response response = await delete(uri, headers: commonHeaders,body: jsonEncode(body));
+      final Response response = await delete(
+        uri,
+        headers: commonHeaders,
+        body: jsonEncode(body),
+      );
 
       _logResponse(response);
 
-      if(response.statusCode==200 || response.statusCode==201){
-        final responseBody = jsonDecode(response.body);
-        return NetworkResponse(statusCode: response.statusCode, responseBody: responseBody,isSuccess: true);
-
-      }else if( response.statusCode==401){
-        onUnAuthorize();
-        return NetworkResponse(statusCode: response.statusCode, errorMessage: "Un-authorized",isSuccess: false);
-
-      }else{
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
-            statusCode: response.statusCode,
-            responseBody: responseBody,
-            errorMessage:responseBody["message"]??_defaultErrorMessage,isSuccess: false );
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          isSuccess: true,
+        );
+      } else if (response.statusCode == 401) {
+        onUnAuthorize();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          errorMessage: "Un-authorized",
+          isSuccess: false,
+        );
+      } else {
+        final responseBody = jsonDecode(response.body);
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          responseBody: responseBody,
+          errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
+          isSuccess: false,
+        );
       }
-    }on Exception catch(e){
-      return NetworkResponse(statusCode: -1, errorMessage: e.toString(),isSuccess: false);
+    } on Exception catch (e) {
+      return NetworkResponse(
+        statusCode: -1,
+        errorMessage: e.toString(),
+        isSuccess: false,
+      );
     }
-
   }
 
-
-
-  // to trace the log with logger
-  void _logRequest(String url,{ Map<String, String>? headers, Map<String, String>? body }){
-
+  // to trace the log with logger in console
+  void _logRequest(
+    String url, {
+    Map<String, String>? headers,
+    Map<String, dynamic>? body,
+  }) {
     final String message = '''
     
         URL-> $url
@@ -203,13 +271,10 @@ class NetworkClient {
         BODY-> $body
     
     ''';
-
     _logger.i(message);
-
-
   }
-  void _logResponse(Response response){
 
+  void _logResponse(Response response) {
     final String message = '''
     
         URL-> ${response.request?.url}
@@ -220,8 +285,5 @@ class NetworkClient {
     ''';
 
     _logger.i(message);
-
-
   }
-
 }
