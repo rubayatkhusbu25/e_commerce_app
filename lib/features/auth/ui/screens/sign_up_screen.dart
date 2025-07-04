@@ -1,8 +1,13 @@
 import 'package:e_commerce_app_ostad/app/app_colors.dart';
+import 'package:e_commerce_app_ostad/core/ui/widgets/center_circular_progressbar.dart';
+import 'package:e_commerce_app_ostad/core/ui/widgets/snackbar_message.dart';
+import 'package:e_commerce_app_ostad/features/auth/data/models/signup_request_model.dart';
+import 'package:e_commerce_app_ostad/features/auth/ui/comtroller/signup_controller.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -23,6 +28,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _addressController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final SignupController _signupController =Get.find<SignupController>();
+
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -37,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
 
                 children: [
-                  SizedBox(height: 44.h),
+                  SizedBox(height: 25.h),
                   AppLogo(height: 90.h, width: 90.w),
                   SizedBox(height: 12.h,),
                   Text("Register Account", style: textTheme.titleLarge),
@@ -160,25 +167,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
                   SizedBox(height: 6.h,),
-                  ElevatedButton(
-                    onPressed: _onTapSignUp,
-                    child: Text("Sign Up"),
-                    style: ButtonStyle(
-                      fixedSize: WidgetStatePropertyAll(
-                        Size.fromWidth(double.maxFinite),
-                      ),
-                      backgroundColor: WidgetStatePropertyAll(
-                        AppColors.themeColor,
-                      ),
-                      foregroundColor: WidgetStatePropertyAll(Colors.white),
-                      textStyle: WidgetStatePropertyAll(
-                        TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.sp,
-                          letterSpacing: .4,
+                  GetBuilder<SignupController>(
+                    builder: (_) {
+                      return Visibility(
+                        visible: _signupController.inProgress ==false,
+                        replacement:CenterCircularProgressBar() ,
+                        child: ElevatedButton(
+                          onPressed: _onTapSignUp,
+                          child: Text("Sign Up"),
+                          style: ButtonStyle(
+                            fixedSize: WidgetStatePropertyAll(
+                              Size.fromWidth(double.maxFinite),
+                            ),
+                            backgroundColor: WidgetStatePropertyAll(
+                              AppColors.themeColor,
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(Colors.white),
+                            textStyle: WidgetStatePropertyAll(
+                              TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.sp,
+                                letterSpacing: .4,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }
                   ),
                 ],
               ),
@@ -189,8 +204,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _onTapSignUp() {
-    if (_formKey.currentState!.validate()) {}
-    ;
+  Future<void> _onTapSignUp() async {
+    if (_formKey.currentState!.validate()) {
+
+      final SignupRequestModel model = SignupRequestModel(
+          email: _emailController.text.trim(),
+          firstName: _firstNController.text.trim(),
+          lastName: _lastNController.text.trim(),
+          city: _cityController.text.trim(),
+          password: _passwordController.text,
+          mobile: _mobileController.text.trim(),
+          address: _addressController.text.trim());
+      
+
+      final bool isSuccess =await _signupController.signUp(model);
+      if(isSuccess){
+        ///TODO: navigate to verify otp screen
+        showSnackBarMessage(context, _signupController.message);
+
+      }else{
+        showSnackBarMessage(context, _signupController.errorMessage!,true);
+      }
+    }
+
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _firstNController.dispose();
+    _lastNController.dispose();
+    _addressController.dispose();
+    _cityController.dispose();
+    _mobileController.dispose();
+    _passwordController.dispose();
+
+
   }
 }

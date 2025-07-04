@@ -21,6 +21,11 @@ App Features:
 5. DTD(Domain Type Design) followed
 6. Authentication with REST API
 7. Named routes added
+8. Controllers used for getX implementation
+9. network client added for api implementation
+10. logger add for debugging in console
+11. 
+
 
 
 

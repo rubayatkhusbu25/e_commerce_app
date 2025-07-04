@@ -46,7 +46,7 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-        titleTextStyle: TextStyle(fontSize: 18.sp,color: Colors.black87),
+        titleTextStyle: TextStyle(fontSize: 16.sp,color: Colors.black87),
         iconTheme: IconThemeData( color: Colors.black87, size: 20.r),
 
       ),

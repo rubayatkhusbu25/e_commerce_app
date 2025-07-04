@@ -23,8 +23,10 @@ class _ProductCategoryState extends State<ProductCategory> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Categories"),
+          leadingWidth: 30,
         leading: Padding(
-          padding:  EdgeInsets.only(left:16.w),
+          padding:  EdgeInsets.only(left:8.w),
+
           child: IconButton(
             onPressed: (){
               Get.find<MainBottomNavController>().backToHome();
@@ -32,7 +34,7 @@ class _ProductCategoryState extends State<ProductCategory> {
             },
               icon: Icon(Icons.arrow_back_ios_new, color: Colors.black87, size: 20.r,)),
         ),
-          leadingWidth: 40,
+
 
         ),
         body: Padding(
