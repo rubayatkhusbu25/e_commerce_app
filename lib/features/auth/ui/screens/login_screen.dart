@@ -3,6 +3,7 @@ import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dar
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding:  EdgeInsets.all(24.r),
           child: SingleChildScrollView(
 
             child: Form(
@@ -35,10 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 spacing: 12,
                 children: [
-                  SizedBox(height: 44,),
+                  SizedBox(height: 44.h,),
                   AppLogo(
-                    height: 90,
-                    width: 90,
+                    height: 90.h,
+                    width: 90.w,
                   ),
                   Text("Welcome Back",style: textTheme.titleLarge),
                   Text("Please enter your Email & Password",style: textTheme.headlineMedium,),
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     foregroundColor: WidgetStatePropertyAll(Colors.white),
                     textStyle: WidgetStatePropertyAll(TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       letterSpacing: .4,
                     ))
                   ),)

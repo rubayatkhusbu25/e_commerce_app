@@ -1,7 +1,7 @@
-import 'package:e_commerce_app_ostad/app/app_theme.dart';
 import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav_controller.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/widgets/product_category_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ProductCategory extends StatefulWidget {
@@ -24,19 +24,19 @@ class _ProductCategoryState extends State<ProductCategory> {
         appBar: AppBar(
           title: Text("Categories"),
         leading: Padding(
-          padding: const EdgeInsets.only(left:16.0),
+          padding:  EdgeInsets.only(left:16.w),
           child: IconButton(
             onPressed: (){
               Get.find<MainBottomNavController>().backToHome();
 
             },
-              icon: Icon(Icons.arrow_back_ios_new, color: Colors.black87, size: 20,)),
+              icon: Icon(Icons.arrow_back_ios_new, color: Colors.black87, size: 20.r,)),
         ),
           leadingWidth: 40,
 
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:  EdgeInsets.all(16.r),
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,

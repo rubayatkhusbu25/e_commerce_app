@@ -1,4 +1,3 @@
-import 'package:e_commerce_app_ostad/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeSearchBar extends StatelessWidget {

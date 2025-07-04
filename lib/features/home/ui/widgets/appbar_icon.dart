@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppbarIcon extends StatelessWidget {
   const AppbarIcon({
@@ -14,11 +14,11 @@ class AppbarIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+        padding:  EdgeInsets.symmetric(horizontal: 4.0.w),
         child: CircleAvatar(
-          radius: 16,
+          radius: 16.r,
           backgroundColor: Colors.grey.shade300,
-          child: Icon(iconData,color: Colors.grey,size: 22,),
+          child: Icon(iconData,color: Colors.grey,size: 22.r,),
         ),
       ),
     );
