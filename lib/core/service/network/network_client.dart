@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
-
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-
 part 'network_response.dart';
 
 class NetworkClient {
@@ -66,7 +64,7 @@ class NetworkClient {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders,body: body);
+      _logRequest(url, headers: commonHeaders, body: body);
 
       final Response response = await post(
         uri,

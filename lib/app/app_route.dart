@@ -1,6 +1,7 @@
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/splash_screen.dart';
+import 'package:e_commerce_app_ostad/features/auth/ui/screens/verify_otp_screen.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/screen/main_bottom_nav.dart';
 import 'package:e_commerce_app_ostad/features/products/ui/screen/create_review_screen.dart';
 import 'package:e_commerce_app_ostad/features/products/ui/screen/product_details_screen.dart';
@@ -31,6 +32,9 @@ class AppRoute {
       screenWidgets =ReviewScreen();
     } else if(settings.name==CreateReviewScreen.name){
       screenWidgets = CreateReviewScreen();
+    }else if(settings.name==VerifyOtpScreen.name){
+      final String email = settings.arguments as String;
+      screenWidgets = VerifyOtpScreen(email: email,);
     }
     return MaterialPageRoute(builder: (context) => screenWidgets);
   }

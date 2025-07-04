@@ -3,6 +3,7 @@ import 'package:e_commerce_app_ostad/core/ui/widgets/center_circular_progressbar
 import 'package:e_commerce_app_ostad/core/ui/widgets/snackbar_message.dart';
 import 'package:e_commerce_app_ostad/features/auth/data/models/signup_request_model.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/comtroller/signup_controller.dart';
+import 'package:e_commerce_app_ostad/features/auth/ui/screens/verify_otp_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -218,9 +219,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       
 
       final bool isSuccess =await _signupController.signUp(model);
+
       if(isSuccess){
-        ///TODO: navigate to verify otp screen
-        showSnackBarMessage(context, _signupController.message);
+        showSnackBarMessage(context, _signupController.message);  //  after successful signup it will move to otp screen with email
+        Navigator.pushNamed(context, VerifyOtpScreen.name,arguments: _emailController.text.trim());
+
 
       }else{
         showSnackBarMessage(context, _signupController.errorMessage!,true);
