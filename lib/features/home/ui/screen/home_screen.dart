@@ -1,5 +1,7 @@
 import 'package:e_commerce_app_ostad/app/assets_path.dart';
+import 'package:e_commerce_app_ostad/core/ui/widgets/center_circular_progressbar.dart';
 import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav_controller.dart';
+import 'package:e_commerce_app_ostad/features/home/ui/controller/home_slider_controller.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/appbar_icon.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/home_carosalslider.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/widgets/product_category_item.dart';
@@ -22,6 +24,9 @@ class HomeScreen extends StatefulWidget {
 
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +38,16 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               HomeSearchBar(),
               SizedBox(height: 5.h,),
-              HomeCarosalslider(),
+              GetBuilder<HomeSliderController>(
+                builder: (homeSlider) {
+                  if(homeSlider.inProgress){
+                    return SizedBox(
+                      height: 192.h,
+                        child: CenterCircularProgressBar());
+                  }
+                  return HomeCarosalslider(sliders: homeSlider.sliderHomeList,);
+                }
+              ),
               _buildSectionHeader(title: "Categories",onTapSeeAll: (){
                 // Navigator.pushNamed(context, ProductCategory.name);
                 Get.find<MainBottomNavController>().moveToIndex();

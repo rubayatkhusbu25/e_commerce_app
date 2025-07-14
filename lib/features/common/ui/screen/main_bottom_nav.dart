@@ -1,5 +1,7 @@
 import 'package:e_commerce_app_ostad/features/cart/ui/screen/cart_screen.dart';
+import 'package:e_commerce_app_ostad/features/common/controllers/category_list_controller.dart';
 import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav_controller.dart';
+import 'package:e_commerce_app_ostad/features/home/ui/controller/home_slider_controller.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/screen/home_screen.dart';
 import 'package:e_commerce_app_ostad/features/products/ui/screen/product_category.dart';
 import 'package:e_commerce_app_ostad/features/wishList/ui/screen/wish_list_screen.dart';
@@ -16,6 +18,17 @@ class MainBottomNav extends StatefulWidget {
 }
 
 class _MainBottomNavState extends State<MainBottomNav> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // optimizing api call one at first loading time
+
+    Get.find<HomeSliderController>().getHomeSliders();
+    Get.find<CategoryListController>().getCategoryList();
+  }
+
   final List<Widget> _screens = [
     HomeScreen(),
     ProductCategory(),

@@ -24,7 +24,14 @@ App Features:
 8. Controllers used for getX implementation
 9. network client added for api implementation
 10. logger add for debugging in console
-11. 
+11. AuthController added for save user data, getUser data & checkIfLogged in or not. 
+12. pagination added in the 
+          product_category.dart(product=>ui=>screen) 
+         & category_list_controller(common=>controller)
+         category_model
+            
+13. 
+
 
 
 

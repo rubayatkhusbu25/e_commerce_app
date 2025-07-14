@@ -5,11 +5,12 @@ import 'package:logger/logger.dart';
 part 'network_response.dart';
 
 class NetworkClient {
-  Logger _logger = Logger();
+
+  final Logger _logger = Logger();
   final String _defaultErrorMessage = "Something went wrong";
 
   final VoidCallback onUnAuthorize;
-  final Map<String, String> commonHeaders;
+  final Map<String, String> Function() commonHeaders;
 
   NetworkClient({required this.onUnAuthorize, required this.commonHeaders});
 
@@ -18,9 +19,9 @@ class NetworkClient {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders);
+      _logRequest(url, headers: commonHeaders());
 
-      final Response response = await get(uri, headers: commonHeaders);
+      final Response response = await get(uri, headers: commonHeaders() );
 
       _logResponse(response);
 
@@ -42,7 +43,6 @@ class NetworkClient {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
-          responseBody: responseBody,
           errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
           isSuccess: false,
         );
@@ -57,18 +57,15 @@ class NetworkClient {
   }
 
   // post
-  Future<NetworkResponse> postRequest(
-    String url,
-    Map<String, dynamic>? body,
-  ) async {
+  Future<NetworkResponse> postRequest(String url,{Map<String, dynamic>? body}) async {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders, body: body);
+      _logRequest(url, headers: commonHeaders(), body: body);
 
       final Response response = await post(
         uri,
-        headers: commonHeaders,
+        headers: commonHeaders(),
         body: jsonEncode(body),
       );
 
@@ -92,7 +89,6 @@ class NetworkClient {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
-          responseBody: responseBody,
           errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
           isSuccess: false,
         );
@@ -109,16 +105,16 @@ class NetworkClient {
   // put
   Future<NetworkResponse> putRequest(
     String url,
-    Map<String, dynamic>? body,
+      {Map<String, dynamic>? body}
   ) async {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders);
+      _logRequest(url, headers: commonHeaders());
 
       final Response response = await put(
         uri,
-        headers: commonHeaders,
+        headers: commonHeaders(),
         body: jsonEncode(body),
       );
 
@@ -142,7 +138,6 @@ class NetworkClient {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
-          responseBody: responseBody,
           errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
           isSuccess: false,
         );
@@ -159,16 +154,16 @@ class NetworkClient {
   // patch
   Future<NetworkResponse> patchRequest(
     String url,
-    Map<String, dynamic>? body,
+      { Map<String, dynamic>? body}
   ) async {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders);
+      _logRequest(url, headers: commonHeaders());
 
       final Response response = await patch(
         uri,
-        headers: commonHeaders,
+        headers: commonHeaders(),
         body: jsonEncode(body),
       );
 
@@ -192,7 +187,6 @@ class NetworkClient {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
-          responseBody: responseBody,
           errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
           isSuccess: false,
         );
@@ -209,16 +203,16 @@ class NetworkClient {
   //delete
   Future<NetworkResponse> deleteRequest(
     String url,
-    Map<String, dynamic>? body,
+      { Map<String, dynamic>? body}
   ) async {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: commonHeaders);
+      _logRequest(url, headers: commonHeaders());
 
       final Response response = await delete(
         uri,
-        headers: commonHeaders,
+        headers: commonHeaders(),
         body: jsonEncode(body),
       );
 
@@ -242,7 +236,6 @@ class NetworkClient {
         final responseBody = jsonDecode(response.body);
         return NetworkResponse(
           statusCode: response.statusCode,
-          responseBody: responseBody,
           errorMessage: responseBody["msg"] ?? _defaultErrorMessage,
           isSuccess: false,
         );

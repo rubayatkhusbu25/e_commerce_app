@@ -3,9 +3,11 @@ import 'package:e_commerce_app_ostad/core/ui/widgets/center_circular_progressbar
 import 'package:e_commerce_app_ostad/core/ui/widgets/snackbar_message.dart';
 import 'package:e_commerce_app_ostad/features/auth/data/models/signup_request_model.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/comtroller/signup_controller.dart';
+import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/verify_otp_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -196,6 +198,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
                     }
                   ),
+                  
+                  RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Already have an account?"
+                          ),
+                          TextSpan(
+                              text: "Sign In",
+                            recognizer: TapGestureRecognizer()..onTap = _moveToLogin,
+                            style: TextStyle(color: AppColors.themeColor)
+                          ),
+
+                        ]
+                      ))
                 ],
               ),
             ),
@@ -203,6 +220,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void _moveToLogin(){
+    Get.to(LoginScreen.name);
   }
 
   Future<void> _onTapSignUp() async {
