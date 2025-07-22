@@ -32,7 +32,7 @@ class _HomeCarosalsliderState extends State<HomeCarosalslider> {
             height: 150.h,
             viewportFraction: 1,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 2),
+            autoPlayInterval: Duration(seconds: 4),
             onPageChanged: (int _currentIndex, _) {
               _currentSlider.value = _currentIndex;
             },

@@ -169,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                  SizedBox(height: 6.h,),
+                  SizedBox(height: 16.h,),
                   GetBuilder<SignupController>(
                     builder: (_) {
                       return Visibility(
@@ -198,21 +198,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
                     }
                   ),
+                  SizedBox(height: 5.h,),
                   
                   RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Already have an account?"
+                            text: "Already have an account? ",
+                              style: TextStyle(color: Colors.grey,fontSize:14.sp )
                           ),
                           TextSpan(
                               text: "Sign In",
                             recognizer: TapGestureRecognizer()..onTap = _moveToLogin,
-                            style: TextStyle(color: AppColors.themeColor)
+                            style: TextStyle(color: AppColors.themeColor,fontSize:14.sp ,fontWeight: FontWeight.bold)
                           ),
 
                         ]
-                      ))
+                      )),
+                  SizedBox(height: 20,)
                 ],
               ),
             ),
@@ -223,7 +226,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _moveToLogin(){
-    Get.to(LoginScreen.name);
+    Navigator.pushNamed(context, LoginScreen.name);
   }
 
   Future<void> _onTapSignUp() async {

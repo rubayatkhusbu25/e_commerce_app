@@ -108,12 +108,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "Don't have an account?"
+                                text: "Don't have an account? ",
+                                style: TextStyle(color: Colors.grey,fontSize:14.sp )
                             ),
                             TextSpan(
                                 text: "Sign Up",
                                 recognizer: TapGestureRecognizer()..onTap=_moveToSignUp,
-                                style: TextStyle(color: AppColors.themeColor)
+                                style: TextStyle(color: AppColors.themeColor,fontSize:14.sp ,fontWeight: FontWeight.bold)
                             ),
 
                           ]
@@ -129,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _moveToSignUp(){
-    Get.to(SignUpScreen.name);
+    Navigator.pushNamed(context, SignUpScreen.name);
   }
 
   Future<void> _onTapLogin() async {

@@ -1,7 +1,11 @@
 import 'package:e_commerce_app_ostad/app/assets_path.dart';
 import 'package:e_commerce_app_ostad/core/ui/widgets/center_circular_progressbar.dart';
+import 'package:e_commerce_app_ostad/features/common/controllers/category_list_controller.dart';
 import 'package:e_commerce_app_ostad/features/common/controllers/main_bottom_nav_controller.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/controller/home_slider_controller.dart';
+import 'package:e_commerce_app_ostad/features/home/ui/controller/new_product_list_controller.dart';
+import 'package:e_commerce_app_ostad/features/home/ui/controller/popular_product_list_controller.dart';
+import 'package:e_commerce_app_ostad/features/home/ui/controller/spcial_product_list_controller.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/appbar_icon.dart';
 import 'package:e_commerce_app_ostad/features/home/ui/widgets/home_carosalslider.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/widgets/product_category_item.dart';
@@ -100,61 +104,93 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _getListCategorySection(){
     return SizedBox(
       height: 100.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-          itemBuilder: (context,index){
-            return ProductCategoryItem();
+      child: GetBuilder<CategoryListController>(
+        builder: (controller) {
+          if(controller.initialInProgress){
+            return CenterCircularProgressBar();
+          }
+          return ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: controller.homeCategoryListItemLength,
+              itemBuilder: (context,index){
+                return ProductCategoryItem(categoryModel: controller.categoryList[index],);
 
 
-      }, separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(width: 10.w);
-      },),
+          }, separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(width: 10.w);
+          },);
+        }
+      ),
     );
   }
 
   Widget _getPopularProducts(){
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        spacing: 8,
-        children: [1,2,3,4].map((e)=>ProductCard()).toList(),
-      ),
+    return GetBuilder<PopularProductListController>(
+      builder: (controller) {
+        return Visibility(
+          visible: controller.inProgress==false,
+          replacement: CenterCircularProgressBar(),
+
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              spacing: 8,
+              children: controller.productList.map((product)=>ProductCard(productModel: product,)).toList(),
+            ),
+          ),
+        );
+      }
     );
 
   }
 
   Widget _getSpecialProducts(){
-    return SizedBox(
-      height: 220.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index){
-            return ProductCard();
+    return GetBuilder<SpecialProductListController>(
+      builder: (controller) {
+        return Visibility(
+          visible: controller.inProgress==false,
+          child: SizedBox(
+            height: 220.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index){
+                  return ProductCard(productModel: controller.productList[index],);
 
-          },
-          itemCount: 10,
-        separatorBuilder: (context, index){
-            return SizedBox(width: 10.w,);
+                },
+                itemCount: controller.productList.length,
+              separatorBuilder: (context, index){
+                  return SizedBox(width: 10.w,);
 
-      }, ),
+            }, ),
+          ),
+        );
+      }
     );
   }
 
   Widget _getNewProducts(){
-    return SizedBox(
-      height: 220.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index){
-          return ProductCard();
+    return GetBuilder<NewProductListController>(
+      builder: (controller) {
+        return Visibility(
+          visible: controller.inProgress==false,
+          replacement: CenterCircularProgressBar(),
+          child: SizedBox(
+            height: 220.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
 
-        },
-        itemCount: 10,
-        separatorBuilder: (context, index){
-          return SizedBox(width: 10.w,);
+              itemBuilder: (context, index){
+                return ProductCard(productModel: controller.productList[index],);
 
-        }, ),
+              },
+              itemCount: controller.productList.length,
+              separatorBuilder: (context, index){
+                return SizedBox(width: 10.w,);
+
+              }, ),
+          ),
+        );
+      }
     );
   }
 

@@ -28,7 +28,13 @@ App Features:
 12. pagination added in the 
           product_category.dart(product=>ui=>screen) 
          & category_list_controller(common=>controller)
-         category_model
+         & category_model
+        product_category_item
+        & product_model
+        & product_list_screen
+        & product_list_category_controller
+        
+
             
 13. 
 

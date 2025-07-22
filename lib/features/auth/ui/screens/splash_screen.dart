@@ -1,11 +1,9 @@
-import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart';
-import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/widgets/app_logo.dart';
+import 'package:e_commerce_app_ostad/features/common/controllers/auth_controller.dart';
 import 'package:e_commerce_app_ostad/features/common/ui/screen/main_bottom_nav.dart';
-import 'package:e_commerce_app_ostad/features/home/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,6 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async {
     await Future.delayed(Duration(seconds: 3));
+    Get.find<AuthController>().getUserData();
+
     Navigator.pushReplacementNamed(context, MainBottomNav.name);
   }
 

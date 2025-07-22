@@ -82,7 +82,7 @@ class _ProductCategoryState extends State<ProductCategory> {
                         )
                         , itemCount: controller.categoryList.length,
                         itemBuilder: (context, index){
-                          return FittedBox(child: ProductCategoryItem()); // fitted box used so that no widgets will breaks
+                          return FittedBox(child: ProductCategoryItem(categoryModel: controller.categoryList[index],)); // fitted box used so that no widgets will breaks
                         }),
                   ),
                 ),
