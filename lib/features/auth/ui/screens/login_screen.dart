@@ -69,11 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _passwordController,
                       keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         hintText: "Password"
               
                       ),
+                      onFieldSubmitted: (_)=>_onTapLogin,
+
                       validator: (String? value){
 
                         if((value?.length??0 )<=6){

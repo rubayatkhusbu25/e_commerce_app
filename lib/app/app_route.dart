@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_ostad/features/Order/ui/screen/shipping_address_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:e_commerce_app_ostad/features/auth/ui/screens/splash_screen.dart';
@@ -35,6 +36,8 @@ class AppRoute {
     }else if(settings.name==VerifyOtpScreen.name){
       final String email = settings.arguments as String;
       screenWidgets = VerifyOtpScreen(email: email,);
+    }else if(settings.name == ShippingAddressScreen.name){
+      screenWidgets = ShippingAddressScreen();
     }
     return MaterialPageRoute(builder: (context) => screenWidgets);
   }

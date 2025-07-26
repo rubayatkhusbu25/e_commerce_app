@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       maxLines: 3,
                       controller: _addressController,
                       keyboardType: TextInputType.streetAddress,
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 12,
@@ -160,6 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         hintText: "Shipping Address",
                       ),
+                      onFieldSubmitted: (_)=>_onTapSignUp,
                       validator: (String? value) {
                         if (value?.trim().isEmpty ?? true) {
                           return "Enter your Shipping Address";
